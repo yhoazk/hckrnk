@@ -1,3 +1,15 @@
+/*
+The stdin is expected to be 
+n
+n1 n2 n3 n4 .. n
+
+
+*/
+
+
+
+
+
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
