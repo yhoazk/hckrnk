@@ -33,4 +33,11 @@ function oddOrEven(array) {
 
 Other solutions implied the `reduce` function for arrays. Here's a short tutorial about `reduce` function.
 
-### Reduce
+### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+
+
+```js
+function oddOrEven(arr) {
+  return arr.reduce((a,b)=>a+b,0) % 2 ? 'odd' : 'even';
+}
+```
