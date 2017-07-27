@@ -6,15 +6,15 @@ Give your answer in string format as 'odd' or 'even'.
 If the input array is empty consider it as: [0] (array with a zero).
 
 Example:
-````js
+```js
 oddOrEven([0]) returns "even"
 oddOrEven([2, 5, 34, 6]) returns "odd"
 oddOrEven([0, -1, -5]) returns "even"
-````
+```
 
 My Solution
 
-````js
+```js
 function oddOrEven(array) {
    var odd = array[0] & 0x01;
    for(var i=1; i<array.length; i++){
