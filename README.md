@@ -34,3 +34,6 @@ But is also true for:
 `6 = 3 x 2 x 1`
 
 #### Why the primality test should get only up-to `sqrt(n)` for any integer `n`
+
+
+#### [Benchmarking progamming languages](http://benchmarksgame.alioth.debian.org/)
