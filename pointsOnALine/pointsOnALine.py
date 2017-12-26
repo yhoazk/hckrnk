@@ -11,7 +11,7 @@ for a0 in range(n):
     x,y = input().strip().split(' ')
     ly.append(int(y))
     lx.append(int(x))
-    
+
 
 if len(set(ly)) == 1 or len(set(lx)) == 1:
     print("YES")

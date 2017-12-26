@@ -1,10 +1,10 @@
 #include <iostream>
 #include <set>
-#include <utility>   
+#include <utility>
 using namespace std;
 
 /* The get method is only for c++11, it's not defined before  */
-int main() 
+int main()
 {
     int n;
     set<int> db;
