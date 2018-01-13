@@ -9,3 +9,13 @@ Let's now add two letters to the last example: `solve([0,1,2,3,'a','b']) = 0.` A
 The input will be an array of lowercase letters and numbers only.
 
 Good luck!
+
+
+Learn:
+
+Nested inline if else statements
+
+
+`positive statement` *if* `<statement>` *else* `negative statement`
+
+In the `else` statement another `if` can be added.
