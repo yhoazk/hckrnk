@@ -25,7 +25,7 @@ int get_random_int(void)
   return random_data;
   /* TODO: Here we should close the device random, but we are lazy fucks */
 }
-/* It would be interesing to check how this works with a SFR random generator */
+/* It would be interesing to check how this works with a LFSR random generator */
 int get_rand_SR_int(void)
 {
   return 0;
