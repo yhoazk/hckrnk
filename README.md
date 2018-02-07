@@ -37,3 +37,16 @@ But is also true for:
 
 
 #### [Benchmarking progamming languages](http://benchmarksgame.alioth.debian.org/)
+
+
+#### [Copy On Write or Shadowing or CoW or COW](https://en.wikipedia.org/wiki/Copy-on-write)
+
+Resource management technique used to efficiently implement a "duplicate"
+or "copy" operation on modifiable resources. If a resource is duplicated
+but NOT modified, it is not necessary to create a new resource.
+The original resource is shared between the copy and the original.
+
+Only when the copied resource is modified a copy is created, then the copy
+operation is deferred to the first write.
+
+
