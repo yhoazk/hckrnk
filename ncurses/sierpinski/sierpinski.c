@@ -14,7 +14,7 @@ int get_random_int(void)
   {
     random_h = open("/dev/random",'r');
   }
-  
+
   int random_data = 0;
   (void)read(random_h, &random_data, sizeof(random_data) ); /* ignore the result of read */
   /* */
@@ -26,11 +26,28 @@ int get_random_int(void)
   /* TODO: Here we should close the device random, but we are lazy fucks */
 }
 /* It would be interesing to check how this works with a LFSR random generator */
-int get_rand_SR_int(void)
+int get_rand_LFSR_Galois_int(void)
 {
-  return 0;
+  static unsigned short lfsr = 0xBEEF;
+  unsigned lsb = lfsr & 1;   /* Get LSB (i.e., the output bit). */
+  lfsr >>= 1;                /* Shift register */
+  if (lsb)                   /* If the output bit is 1, apply toggle mask. */
+  {
+    lfsr ^= 0xB400u;
+  }
+
+  return lfsr;
 }
 
+
+int get_rand_LFSR_Fib_int(void)
+{
+  static unsigned short lfsr = 0xBEEF;
+
+  lfsr =  ((((lfsr>>0) ^ (lfsr>>2) ^ (lfsr>>3) ^ (lfsr>>5) ) & 1) << 15) | (lfsr >> 1);
+
+  return lfsr;
+}
 
 int main(void)
 {
@@ -63,7 +80,7 @@ int main(void)
   mvaddch(y[0], x[0], '0');
   mvaddch(y[1], x[1], '1');
   mvaddch(y[2], x[2], '2');
-  
+
   /* Init xi, yi, with rand values */
 
   yi = get_random_int() % maxlines;
@@ -72,7 +89,13 @@ int main(void)
   /**/
   for(iter=0; iter < ITERMAX; iter++)
   {
+    #ifdef RANDOM_DEV
     index = get_random_int() % 3;
+    #elif defined(RANDOM_FIB_LFSR)
+    index = get_rand_LFSR_Fib_int() % 3;
+    #else
+    index = get_rand_LFSR_Galois_int() % 3;
+    #endif
     yi = (yi + y[index]) / 2;
     xi = (xi + x[index]) / 2;
 
