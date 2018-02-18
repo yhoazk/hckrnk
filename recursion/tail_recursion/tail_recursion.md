@@ -1,4 +1,4 @@
-# Tail recursion in GCC
+# [Tail recursion in GCC](https://stackoverflow.com/questions/490324/how-do-i-check-if-gcc-is-performing-tail-recursion-optimization)
 
 Tail recursion is a optimization technique to avoid stack overruns
 when executing recursive functions. The optimization consists of 
