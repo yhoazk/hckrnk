@@ -41,10 +41,16 @@ int main()
    // cout << points[i].pangle << endl;
   }
 
-  stable_sort(points.begin(), points.end(), comp_d);
-  stable_sort(points.begin(), points.end(), comp);
+  //stable_sort(points.begin(), points.end(), comp_d);
+  stable_sort(points.begin(), points.end(), [](const point& x, const point& y){
+        return (x.rad < y.rad);
+      });
+  //stable_sort(points.begin(), points.end(), comp_d);
+  stable_sort(points.begin(), points.end(), [](const point& x, const point& y){
+        return (x.pangle < y.pangle);
+      });
   //cout << "------\n";
-  for(auto p:points)
+  //for(auto p:points)
  // {
    // cout << "x: " << p.x << " y: " << p.y << " ang: " << p.pangle << "\n";
   //}
