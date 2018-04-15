@@ -1,18 +1,79 @@
-#if 0
+#if 01
 #include <iostream>
+#include <string>
 #include <gtest/gtest.h>
-
+using namespace std;
 double square_root(double x)
 {
   return x/2;
 }
 
+enum log_level {
+  FATAL = 0,
+  ERROR,
+  WARN,
+  INFO,
+  DEBUG,
+  VERBOSE
+};
+
+bool is_true(bool t)
+{
+  return t;
+}
+
+
+string convert_test(unsigned int x)
+{
+  constexpr int b = 1 << (sizeof(unsigned int)*8)-1;
+  string out;
+  while(x)
+  {
+    if(x & (b))
+    {
+      out += "1";
+    }
+    else{
+      out += "0";
+    }
+    x >>=1;
+  }
+  return out; // what happens with out if only lives here?
+}
+
+void log_test(string id, string cntx, string msg, log_level lvl) noexcept;
+
+void log_test(string id, string cntx, string msg, log_level lvl) noexcept
+{
+  std::cout << id << cntx << msg << ":" << lvl << '\n';
+}
 TEST(SquareRootTest, PositiveNos)
 {
     EXPECT_EQ (18.0, square_root (324.0));
     EXPECT_EQ (25.4, square_root (645.16));
     EXPECT_EQ (50.3321, square_root (2533.310224));
 }
+
+TEST(SquareRootTest, SWS_DTL_0001)
+{
+  ASSERT_EQ (true, true);
+
+}
+
+TEST(DLT, SWS_DTL_00013)
+{
+  ASSERT_EQ (true, is_true(true));
+
+}
+
+
+TEST(DLT, SWS_DTL_00033)
+{
+  ASSERT_EQ ("1010101", convert_test(55));
+
+}
+
+
 
 TEST (SquareRootTest, ZeroAndNegativeNos)
 {
@@ -25,8 +86,8 @@ int main(int argc, char **argv)
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
-#endif
 
+#else
 #include <iostream>
 #include "gtest/gtest.h"
 
@@ -53,3 +114,4 @@ int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+#endif

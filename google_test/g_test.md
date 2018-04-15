@@ -52,3 +52,6 @@ int main(int argc, char** argv){
 
 
 After this step the generated directory is in the specified path
+
+
+http://www.yolinux.com/TUTORIALS/Cpp-GoogleTest.html
