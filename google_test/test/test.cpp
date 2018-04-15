@@ -25,19 +25,26 @@ bool is_true(bool t)
 
 string convert_test(unsigned int x)
 {
-  constexpr int b = 1 << (sizeof(unsigned int)*8)-1;
+  constexpr unsigned int b = 1 << (sizeof(unsigned int)*8)-1;
   string out;
+  bool f1 = false; // to start to concatenate with the first 1
   while(x)
   {
     if(x & (b))
     {
+      f1 = true;
       out += "1";
+      cout << "1";
     }
-    else{
+    else if(f1){
       out += "0";
+      cout << "0"; // the last 0 is not being added to the string. WHYYYY?
     }
-    x >>=1;
+    cout << (f1? "+":"-");
+    x <<=1;
   }
+  out += "b0";
+
   return out; // what happens with out if only lives here?
 }
 
@@ -66,13 +73,11 @@ TEST(DLT, SWS_DTL_00013)
 
 }
 
-
 TEST(DLT, SWS_DTL_00033)
 {
-  ASSERT_EQ ("1010101", convert_test(55));
+  ASSERT_EQ ("10101010", convert_test(0xAA));
 
 }
-
 
 
 TEST (SquareRootTest, ZeroAndNegativeNos)
