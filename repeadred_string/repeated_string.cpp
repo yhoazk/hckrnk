@@ -11,14 +11,14 @@ using namespace std;
 //  return std::count(s.begin(), s.begin()+end, c);
 //}
 // [](){}
-long repeatedString(string s, long n) {
+auto repeatedString = [](string s, long n) {
     //long ains = num_c_in_s('a', s, 0, s.length());
     auto d = [](char c,string s, long n){ return count(s.begin(), s.begin()+n, c);};
 //    long ains = d('a', s, s.length());
 //    long  full = n/s.length();
 //    long part = n % s.length();
     return (n/s.length() * d('a', s, s.length())) + d('a',s,n%s.length());
-}
+};
 
 int main() {
     string s;
