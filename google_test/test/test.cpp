@@ -64,8 +64,29 @@ TEST(SquareRootTest, PositiveNos)
 TEST(SquareRootTest, SWS_DTL_0001)
 {
   ASSERT_EQ (true, true);
-
 }
+
+/*
+String comparison
+
+ASSERT_STREQ     EXPECT_STREQ   THE TWO STRINGS HAVE THE SAME CONTENT
+ASSERT_STRNE     EXPECT_STRNE
+ASSERT_STRCASEEQ EXPECT_STRCASEEQ
+ASSERT_STRCASENE EXPECT_STRCASENE
+*/
+
+TEST(STRING_TEST, _0001)
+{
+  EXPECT_TRUE(strcmp("This", "This") == 0);
+}
+
+TEST(STRING_TEST, _0002)
+{
+  const char one[] = "String test";
+  const char two[] = "string test";
+  EXPECT_STREQ(one, two);
+}
+
 
 TEST(DLT, SWS_DTL_00013)
 {

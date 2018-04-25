@@ -46,9 +46,10 @@ int main(int argc, char** argv){
 2. Extract the contents in a tmp directory. `tar -xvf <googletest-version>`
 3. Create the build directoy and go there `mkdir build && cd build`
 4. Generate the makefiles `cmake -DMAKE_INSTALL_PREFIX:PATH=../../DIR ../googletest` the prefix is
-   relative.
-5. make
-6. make install
+   relative. The normal procedure installs in the linux system `/usr/local/include` for that
+   just run `cmake ..` in the build directory.
+5. `makev
+6. `sudo make install`
 
 
 After this step the generated directory is in the specified path
