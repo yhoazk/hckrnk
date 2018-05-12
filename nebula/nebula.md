@@ -263,3 +263,17 @@ tar xvzf /home/flag05/.backup/backup-19072011.tgz -C ~
 ssh flag05@localhost
 flag05@nebula:~$ getflag
 ```
+
+
+### Level06
+
+The flag06 account credentials came from a legacy unix system.
+The files for this level can be found in `/home/flag06`.
+This means that the password is in the `/etc/passwd` file but is encrypted using
+the crypt function.
+
+In this case, is relatively easy, we start with a dictionary attack using the
+most common passwords.
+
+Here is the implementation:
+[solution](https://github.com/yhoazk/hckrnk/tree/master/john_ripper)
