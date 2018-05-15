@@ -277,3 +277,35 @@ most common passwords.
 
 Here is the implementation:
 [solution](https://github.com/yhoazk/hckrnk/tree/master/john_ripper)
+
+
+### Level07
+
+Find the vulnerability in this code. Into:
+The user flag07 has written this code that allowed them to ping hosts to see
+if they were reacheable from the web server.
+
+```p
+#!/usr/bin/perl
+
+use CGI qw{param};
+
+print "Content-type: text/html\n\n";
+
+sub ping {
+  $host = $_[0];
+
+  print("<html><head><title>Ping results</title></head><body><pre>");
+
+  @output = `ping -c 3 $host 2>&1`;
+  foreach $line (@output) { print "$line"; }
+
+  print("</pre></body></html>");
+  
+}
+
+# check if Host set. if not, display normal page, etc
+
+ping(param("Host"));
+
+```
