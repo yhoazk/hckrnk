@@ -14,7 +14,7 @@ You are given `q` queries in the form of `x`, `y` and `z` representing the
 respective positions of the cats `A` and `B` and for the mouse `C`.
 
 * If a cat `A` catches the mouse first, print `Cat A`.
-* If a cat `B` catches the mouse first, print `Cat B
+* If a cat `B` catches the mouse first, print `Cat B`.
 * If both cats reach the mouse at the same time, print `Mouse C`.
 
 ## Input format
