@@ -8,6 +8,15 @@ vector<string> split_string(string);
 // As it would be wasteful to create an array with all the n 
 // elemets we could find the  weighted overlaping ranges
 // the order of the operations does not matter 
+// We could use a patch structure, where the number of 
+// patches is the number of areas separated by 0s
+// and every patch keeps it's max value at the end we just
+// collect the max of every patch. The problem with approach 
+// are:
+// - sparce patches that may consume memory
+// - unbalancend patches which may have big differences in value
+// - 
+//
 // TODO find intersecting planes in 2D
 long arrayManipulation(int n, vector<vector<int>> queries) {
 return 3;
