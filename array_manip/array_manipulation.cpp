@@ -18,11 +18,21 @@ vector<string> split_string(string);
 // - 
 //
 // TODO find intersecting planes in 2D
+#define NAIVE
+#ifdef NAIVE
+vector<long> values;
 long arrayManipulation(int n, vector<vector<int>> queries) {
-return 3;
+  values.resize(n);
+  long max = 0;
 
+  
+
+  return max;
 }
-
+#else
+long arrayManipulation(int n, vector<vector<int>> queries) {
+}
+#endif
 int main()
 {
     //ofstream fout(getenv("OUTPUT_PATH"));
@@ -46,7 +56,7 @@ int main()
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-
+    
     long result = arrayManipulation(n, queries);
 
     cout << result << "\n";
