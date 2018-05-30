@@ -60,10 +60,14 @@ void draw(){
        image(pencil,0,0);
        print(xy.getFloat("x") + " " + xy.getFloat("y") + "\n");
        r1 = sqrt( pow(xy.getFloat("y"), 2) + pow(xy.getFloat("x"), 2));
-       r2 = sqrt( pow(xy.getFloat("y"), 2) + pow((motors[1][0]) - xy.getFloat("x"), 2) );
+       r2 = sqrt( pow(xy.getFloat("y"), 2) + pow((motors[1][0]) - (motors[0][0] +xy.getFloat("x")), 2) );
        motor_radi(0, r1);
        motor_radi(1, r2);
-       delay(50);
+       delay(10);
+    }
+    else{
+      draw = false;
+      pencil.background(200);
     }
     //
   } else {
@@ -77,6 +81,7 @@ void draw(){
 
 void keyPressed(){
   if(key == ' '){
+    saveJSONArray(drawing, "drawing.json");
     draw=true;
     new_draw= false;
     index = 0;
