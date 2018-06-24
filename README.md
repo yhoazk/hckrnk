@@ -4,6 +4,52 @@ common snippets and soluitions for hacker rank
 # Make the pc BEEP for wind and linux
 `echo -ne '\007'`
 
+### Quines
+
+A quine is a non-empty program which takes no input and produces a copy if its
+own source code as its only output. These programs are also called self-
+replicating or self-reproducing programs. Quines are possible in any turing
+complete programming language. There's much practical usage in quines.
+
+The Ken Thompson Hack (1984)
+http://wiki.c2.com/?TheKenThompsonHack 
+
+Its a hack in the compiler that makes something like this pseudo code:
+```
+def compile(src):
+  if(looksLikeLoginCode(src)):
+      generateLoginWithBackDoor()
+  else:
+    compileNormally(src)
+```
+But this can be discovered easily, to avoid someone else to noticing it in
+the src code then change needs to go in the compiler:
+
+```
+def compile(src):
+  if (looksLineLoginCode(src):
+    generateLoginWithBackdoor(src)
+  elif(looksLikeCompierCode(src)):
+    generateCompilerWithBackDoorDetection(src)
+  else:
+    compileNormally(src)
+```
+
+What happens is that the c compiler code is modified, so that it compiles itself,
+it inserts the backdoor code. So now when the C compier compiles login, it will 
+inset the backdoor and when it compiles the C compiler, it will insert the code
+that inserts the code into both login and the C compiler.
+
+Now, you compile the C compier with itself, getting a C compiler that includes
+the backdoor generation code explicitly. Then you delete the backdoor code from
+from the C compiler src. But it's in the binary. So when you use that binary to
+produce a new version fo the compiler from src code, it will insert that back
+door code into the new version.
+
+So now we have a C compiler that inserts a backdoor when it compiles itself
+and the backdoor code appears nowhere in the source code of the compiler, because
+it was removed. that means that each successive new version of the C compiler
+will pass along the back door. 
 
 
 
