@@ -1,6 +1,50 @@
 # Hash
 [algorithm design and application ch 6](./)
 
+http://www.partow.net/programming/hashfunctions/index.html
+
+The simplest hash was proposed by Knuth in the art of computer programming.
+He proposes to take the modulo with a prime number. The problem is that there's
+a high probability of collisions.
+
+
+
+## Bob Jenkins hash function
+
+http://burtleburtle.net/bob/hash/doobs.html
+
+
+
+
+
+
+## Hash vs CRC vs Crypto Hash
+
+By convention, the output value for a CRC is called _checksum_, and the output
+value for a hash is called a _digest_.
+
+CRCs are a type of error-detecting code used to implement checksums. CRCs are
+specifically designed to satisfy the property that they can detect Tx errors
+in the data. The CRC is computed over the data payload and sent as part of
+the data transmission. The receiver can recompute the CRC and compare it.
+- No other property of the CRC matters other than whether it differs when data
+corruption occurs.
+- It isnt important if the CRC is biased in any way as long as the Tx error
+result in differing CRCs.
+
+An error of a single bit or a sigle byte will guarantee that the CRC checksum
+will fail, regardless of any other property of the transmitted data, including
+its length. This is a powerful property, since it guards against the most
+commont type of Tx errors.
+
+Has functions optimize for a different property they try to optimize for the
+case of reducing bias in the output digest value. That is hashes should attempt
+to have unbiased output values even when the output is biased. Also they try to
+optimize to reduce hash collisions for differing input values.
+
+Cryptographic hash functions have very large digest values compared to what is
+typically used in a CRC. For example MD5 has a 128-bit digest and SHA-1 has a 
+160-bit digest value.
 
 ## Maps
 
@@ -32,8 +76,6 @@ is reasonable if the number of items, n, being stored in the map is close to N.
 But if the N is large relative to n, then most of the cells will be empty,
 wasting space.
 
-
-
 ## Hash functions
 
 If we cannot assume that the keys are unique integers in the range [0,N-1], but
@@ -42,9 +84,6 @@ the key to our integer range [0,N-1], where N is the capacity of the array. The
 use of such function allows us to treat objects, such as strings as numbers.
 
 ### Collisions 193
-
-
-
 
 - - -
 how to handle a collision?<br>
