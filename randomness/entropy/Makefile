@@ -11,3 +11,5 @@ comp:
 
 run:
 	./${APP}.exe < input
+	./${APP}.exe < input0
+	./${APP}.exe < input1

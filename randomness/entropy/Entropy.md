@@ -25,7 +25,16 @@ Where **<i>count<sub>i</sub></i>** is the count of characters **n<sub>i</sub>**
 
 In this example **X**="11223334444". The resulting entropy should be `1.86644`
 bits/symbols. This assumes X was a random variable, which may not be the case,
-or it may depend on the observer (?).
+or it may depend on the observer (?). This measures the amount en entropy
+taking as universe of allowed symbols only the symbols in the present string.
+For example in "11223334444" N = 4. and count<sub>i</sub> is:
+For pair element : count
+```
+1:1
+2:2
+3:3
+4:4
+```
 
 This formula calculates the __specific__ or __intensive__ entropy that finds
 parallel in physics with the specific entropy S<sup>0</sup> which is entropy
@@ -72,3 +81,25 @@ confused with Shannons (specific) entropy.
 
 Relative entropy is a measure of how close or distant one probability
 distribution is to another.
+
+## Samples
+```
+1223334444
+1.84644
+
+the lazy fox jump over brown dog
+4.14032
+
+D97Ad7AZSD8A7dhA7FAfF8FHASFUHASDFUAH87ZSF
+3,12278
+
+345B2345C2345C234T25C324345C23Z24WERS FDDGBNHJKTUZTERFDGNHJM,MTNBFVSDCGRWE
+4.33509
+
+oownya8+1CCn'rWf3$akopQ2Qx@1X3IU:k%6>3"i*!hCBS\~p|mIM/'qmD$@;&d
+5.17523
+```
+
+
+ - - -
+https://planetcalc.com/2476/
