@@ -22,7 +22,7 @@ one black and one white.
 
 congruent pieces: of the same shape and size
 
-
+http://www.people.vcu.edu/~rhammack/BookOfProof/
 
 Tensigrity: 
 https://en.wikipedia.org/wiki/Tensegrity
