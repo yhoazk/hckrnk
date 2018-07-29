@@ -10,14 +10,14 @@ frameworks as `CppUnit`
 
 Generating a XML report is wasy, just pass the switch --getst_output="<xml:filename>"`.
 
-
-
 ## Creating a basic test
 
 Function to test:
+
 ```cpp
 double square_root(const double);
 ```
+
 For negative numbers, this routine returns `-1`. It's useful to have both positive
 and negative tests here, so you do both.
 
@@ -48,11 +48,9 @@ int main(int argc, char** argv){
 4. Generate the makefiles `cmake -DMAKE_INSTALL_PREFIX:PATH=../../DIR ../googletest` the prefix is
    relative. The normal procedure installs in the linux system `/usr/local/include` for that
    just run `cmake ..` in the build directory.
-5. `makev
+5. `make`
 6. `sudo make install`
 
-
 After this step the generated directory is in the specified path
-
 
 http://www.yolinux.com/TUTORIALS/Cpp-GoogleTest.html
