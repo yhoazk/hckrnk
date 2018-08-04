@@ -1,6 +1,4 @@
-          <h2>
-              <a href="https://blog.aurynn.com/2015/12/16-contempt-culture">Contempt Culture</a>
-          </h2>
+[Contempt Culture](https://blog.aurynn.com/2015/12/16-contempt-culture)
     
     
 <p>So when I started programming in 2001, it was <em>du jour</em> in the communities I participated in to be highly critical of other languages. Other languages <em>sucked</em>, the people using them were <em>losers</em> or <em>stupid</em>, if they would just use <em>a real language</em>, such as the one we used, everything would just be <em>better</em>.</p>
