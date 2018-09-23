@@ -1,3 +1,4 @@
+var imp = require( '~/dext.js' );
 base=JSON.parse('');
 
 local = JSON.parse('');
