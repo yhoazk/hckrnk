@@ -1,0 +1,3 @@
+build --strategy=CppCompile=standalone
+test --strategy=CppCompile=standalone
+run --strategy=CppCompile=standalone

@@ -94,6 +94,13 @@ TEST(DLT, SWS_DTL_00013)
 
 }
 
+TEST(DLT, DISABLED_00013)
+{
+  ASSERT_EQ (true, is_true(true));
+
+}
+
+
 TEST(DLT, SWS_DTL_00033)
 {
   ASSERT_EQ ("10101010", convert_test(0xAA));

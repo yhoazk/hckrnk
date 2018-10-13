@@ -7,3 +7,4 @@ report.xml
 a.out
 *~
 drawing.json
+bazel-*
