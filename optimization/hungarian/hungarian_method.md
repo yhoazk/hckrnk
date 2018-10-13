@@ -45,10 +45,49 @@ step 3.
 
 ### Example Cont.
 
+#### Step 1: 
+Subtract 250 from row 1, 350 from row 2, and 200 from row 3
+|       |         |       |    |       |         |       |
+|:-----:|:-------:|------:|---:|:-----:|:-------:|------:|
+| 250   |  400    |  350  | -> |   0   |  150    |  100  |
+| 400   | 600     |  350  | -> |  50   | 250     |   0   |
+|  200  | 400     |  250  | -> |   0   | 200     |   50  |
+
+
+
+#### Step 2: 
+Subtract 0 from col 1, 150 from col 2 and 0 from col 3
+
+|       |         |       |    |       |         |       |
+|:-----:|:-------:|------:|---:|:-----:|:-------:|------:|
+|   0   |  150    |  100  | -> |   0   |    0    |  100  |
+|  50   | 250     |   0   | -> |  50   | 100     |   0   |
+|   0   | 200     |   50  | -> |   0   |  50     |   50  |
+
+
+#### Step 3: 
+Cover all zeros of the matrix with the minimum number of horizontal or vertical
+lines
+
+![](./step3.png)
+
+#### Step 4:
+
+since the minimal number of lines is 3 an optimal assignment of zeros is possible
+and we are done. Since the total cost for this assignment is 0, it must be an
+optimal assignment,
 
 |       |         |       |
 |:-----:|:-------:|------:|
-| 250   |  400    |  350  |
-| 400   | 600     |  350  |
-|  200  | 400     |  250  |
+|   0   |  **0**  |  100  |
+|  50   | 100     | **0** |
+| **0** |  50     |   50  |
 
+
+Here is the same assignment made to the original cost matrix.
+
+|       |         |       |
+|:-----:|:-------:|------:|
+| 250   |**400**  |  350  |
+| 400   | 600     |**350**|
+|**200**| 400     |  250  |
