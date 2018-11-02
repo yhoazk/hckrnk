@@ -51,8 +51,8 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         using namespace std;
-        ListNode* rl1 = reverseList(l1);    
-        ListNode* rl2 = reverseList(l2);
+        ListNode* rl1 = l1;//reverseList(l1);    
+        ListNode* rl2 = l2;//reverseList(l2);
         int rem = 0;
         int res = 0;
         int sum = 0;
