@@ -2,7 +2,7 @@
 
 #if 0
 
-This snippet can be used to decrypt hashes used in olds versions 
+This snippet can be used to decrypt hashes used in old versions 
 of linux where the password hash is in plain text in the /etc/passwd
 The salt are the first two letters of the hash.
 For example this prints:
