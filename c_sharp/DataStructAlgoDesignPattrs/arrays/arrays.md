@@ -53,3 +53,11 @@ int[,] array_2d = new int[,] = {9,5,9}, {}
 ##### `GetLength(int)`
 
 Returns the length of the dimension given by the argument.
+
+
+### Jagged Arrays
+
+Array of arrays also can be understood as a single dimensional array, where
+each element is another array. Inner arrays may have different lengths or be
+uninitialized.
+
