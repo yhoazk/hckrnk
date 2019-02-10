@@ -20,6 +20,7 @@ public class arrays{
         PrintColorsInColor();
         one_dim_array();
         two_dim_array();
+        jagged_arrays();
     }
 
     private static void one_dim_array(){
@@ -45,24 +46,26 @@ public class arrays{
         /**
             A jagged array is a one dimension array which contains a reference to
             other array objects.!--
-                 */
+        */
         int[][] jagged = new int[3][]; // Here the size must be declared cannot be omited
         // Now setting the sizes of every array of the array of arrays
         jagged[0] = new int[1];
         jagged[1] = new int[5];
         jagged[2] = new int[3];
         // Now set the values in every array
-
         jagged[0] = new int[]{1};
         jagged[1] = new int[]{0,1,2,3,4};
         jagged[2] = new int[]{2,3,4};
-
+        // Accessing the values in the jagged array is different from the 
+        // multidimensional arrays
+        Console.WriteLine("Jagged arrays: 1,1");
+        Console.WriteLine(jagged[1][4]);
     }
     private static void PrintColorsInColor(){
         Type color_type = typeof(ConsoleColor);
         foreach (var name in Enum.GetNames(color_type)){
             Console.ForegroundColor = (ConsoleColor)Enum.Parse(color_type, name);
-            Console.WriteLine(name);
+            Console.Write("  " + name);
         }
         Console.ResetColor();
     }   
