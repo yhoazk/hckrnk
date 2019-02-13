@@ -12,14 +12,17 @@ using System;
 class sel_sort{
     public static void Main(){
         Console.WriteLine("Selection Sort");
-        int[] test_int = {3,3,4,5,6,7,8,-12};
-        string[] test_str = {"aa", "Ee", "wer", "ywe", "Z"};
-        sort(test_int);
+                         // n............0 The indices are from N to less 
+        int[] test_int = {3,3,4,-12,6,7,8,-12,9};
+        string[] test_str = {"aa", "Ee", "wer", "ywe", "Z", "qwe"};
+//        sort(test_int);
         swap(ref test_int[test_int.Length-1],ref test_int[0]);
         Console.WriteLine(""); // print a new line char
-        sort(test_int);
-        getIndexOf(coll: test_int, item: -12);
-        sort(test_str);
+//        sort(test_int);
+        Console.Write("Indx of -12: ");
+        Console.WriteLine(getIndexOf(coll: test_int, item: -12));
+        getIndexOf(coll: test_str, item: "Z");
+//        sort(test_str);
     }
 
     public static void sort<T>(T[] elem) where T: IComparable
@@ -29,7 +32,7 @@ class sel_sort{
         }
         // Parameters can be also called by name
         // and the type has to be specified as a C++ template specialization
-        //getIndexOf<int>(coll: elem, item: -12);
+//        getIndexOf<T>(coll: elem, item: -12);
     }
 
     /// <summary>
@@ -69,9 +72,20 @@ class sel_sort{
     /// <param name="end">The search for the item in collection will stop at this index</param>
     private static int getIndexOf<T>(T[] coll, T item, int start=0, int end=-1) where T: IComparable
     {
-        Console.WriteLine("end");
-        Console.WriteLine(end);
-        return start;
+        int indx = 0;
+        foreach (var i in coll)
+        {
+            Console.Write(i);
+            Console.Write("::");
+            Console.WriteLine(item);
+            if(item.CompareTo(i) == 0){
+              //  Console.WriteLine("FOUND");
+                break;                
+            }
+            indx++;
+        }
+
+        return indx;
     }
 }
 /*
