@@ -9,3 +9,6 @@ a.out
 drawing.json
 bazel-*
 .vscode/
+
+
+.vs/
