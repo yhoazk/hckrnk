@@ -88,6 +88,5 @@ class sel_sort{
         return indx;
     }
 }
-/*
-error CS0411: Die Typargumente der 'sel_sort.getIndexOf<T>(T[], T, int, int)'-Methode können nicht per Rückschluss
-        aus der Syntax abgeleitet werden. Geben Sie die Typargumente explizit an.*/
+/* error CS0411: Die Typargumente der 'sel_sort.getIndexOf<T>(T[], T, int, int)'-Methode können nicht per Rückschluss
+        aus der Syntax abgeleitet werden. Geben Sie die Typargumente explizit an. */
