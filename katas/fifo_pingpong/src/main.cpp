@@ -27,6 +27,7 @@ void read_fifo(std::string fname){
 
 void write_fifo(const std::string fname, const std::string input){
   std::ofstream wrfifo(fname);
+  std::this_thread::sleep_for(std::chrono::seconds(2));
   std::cout << "Will wite to fifo: " << input << '\n';
   if(wrfifo.is_open()){
     wrfifo << input << '\n';
@@ -34,7 +35,6 @@ void write_fifo(const std::string fname, const std::string input){
   } else {
     std::cerr << "Error opening the wr fifo\n";
   }
-  std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 
