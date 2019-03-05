@@ -9,20 +9,74 @@ or down represents a 1 unit change in altitude. We define the following terms:
 - A valley is a sequence of consecutive steps below sea level, starting with a
 step down from sea level and ending with a step up to sea level.
 
-Given Gary's sequence of up and down steps during his last hike, find and print the number of valleys he walked through.
+Given Gary's sequence of up and down steps during his last hike, find and print
+the number of valleys he walked through.
 
-For example, if Gary's path is 
+For example, if Gary's path is DDUUUUDD he first enters a valley 2 units deep.
+Then he climbs out an up onto a mountain units high. Finally, he returns to sea
+level and ends his hike.
+
+Example:
+8
+UDDDUDUU
+
+Expected
+1
 */
 
 #include <bits/stdc++.h>
 
 
-int main(){
+int countingValleys(int n, std::string step_seq) {
   int steps;
-  std::string step_seq;
+  signed int level = 0; // we start at sea level
+  bool went_up = true; // is only a valley if we went first to a mountain
+  int valleys;
+  //assert(steps == step_seq.length());
 
-  std::cin >> steps;
-  std::cin >> step_seq;
-  std::cout << "Trip len: " << step_seq.length();
-  return 0;
+  for(auto c: step_seq){
+    switch(c){
+      case 'D':
+        if(level == 0 && went_up){
+          std::cout << "valllley\n";
+          valleys++;
+          went_up = false;
+        }
+        --level;
+        std::cout << "Down\n";
+      break;
+      case 'U':
+        std::cout << "Up\n";
+        if(!went_up && (level == -1)){
+          std::cout << "uppp\n";
+          went_up = true;
+        }
+        ++level;
+      break;
+      default:
+        std::cerr << "Undefined char\n";
+      break;
+    }
+  }
+return valleys;
+}
+
+int main()
+{
+    std::ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    std::cin >> n;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::string s;
+    getline(std::cin, s);
+
+    int result = countingValleys(n, s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
 }
