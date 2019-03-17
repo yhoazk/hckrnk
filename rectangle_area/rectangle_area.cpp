@@ -5,44 +5,36 @@ using namespace std;
 /*****    START OF OUR CODE    ************/
 /******************************************/
 
-
-
-
 /*
  * Create classes Rectangle and RectangleArea
  */
+template<typename NUM_T>
 class Rectangle {
-    public:
-    int width;
-    int height;
-    void display()
-    {
+public:
+
+    void display(){
         cout << width << " "  << height << endl;
     }
+    NUM_T width{0};
+    NUM_T height{0};
 };
+
+
+template<typename NUM_T>
 class RectangleArea: public Rectangle {
-    public:
-    void read_input()
-    {
+public:
+    void read_input(){
         cin >> width >> height;
     }
     
-    void display()
-    {
+    void display(){
         cout <<   width * height << endl; 
     }
 };
 
-
-
-
-
 /******************************************/
 
-
-
-int main()
-{
+int main(){
     /*
      * Declare a RectangleArea object
      */
