@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>Hello World</title>
+    <style>
+      body {
+        border: 1px solid black;
+      }
+    </style>
+
+    <!-- Inline scripts are forbidden in Firefox OS apps (CSP restrictions),
+         so we use a script file. -->
+    <script src="app.js" defer></script>
+
+  </head>
+
+  <body>
+    <!-- This code is in the public domain. Enjoy! -->
+    <h1>Hello World</h1>
+    <input type="number" id="grid_n" value="10">
+    <input type="number" id="grid_m" value="10">
+    <input type="number" id="grid_w" value="10">
+
+    <input type="button" title="sfsd" onclick="shuffleCx()" onmouseover="blurMe()" value="shuffleCx">
+    <input type="button" onclick="generate()" onmouseover="blurMe()" value="generate">
+    <input type="button" onclick="draw_grid()" onmouseover="blurMe()" value="Draw Grid">
+      <svg id="circles" width="720" height="120">
+        <circle cx="40" cy="60" r="10"></circle>
+        <circle cx="80" cy="60" r="10"></circle>
+        <circle cx="120" cy="60" r="10"></circle>
+      </svg>
+
+      <div id="grid"></div>
+  </body>
+
+</html>
