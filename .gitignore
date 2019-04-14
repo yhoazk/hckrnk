@@ -10,3 +10,4 @@ drawing.json
 bazel-*
 .vscode/
 .vs/
+.ipynb_checkpoints/
