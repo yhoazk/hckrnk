@@ -4,7 +4,7 @@
 
 In classic miltithread algorithms whenever data needs to be shared the access
 to it must be serialized and operations that change data must appear as atomic
-such that no other thead intervenes to spoil data's invariant. Even simple 
+such that no other thead intervenes to spoil data's invariant. Even simple
 operations as `++count` must be locked as the `++` is actually 3 steps.
 (read, modify, write). In short in lock-based multithreading the programmer
 must ensure that any access to data susceptible to race conditions is made
@@ -21,7 +21,7 @@ small set of operations are atomical. This makes lock-free programmign harder.
 But which set of lock-free operations will allow to implement any lock-free
 algorithm? Maurice Herlihy showed that atomic operations such as _test-and-set_
  _swap_, _fetch_and_add_ or even atomic queues are insuficcient for properly
-synchronizinh more than two threads. On the other side he also gave 
+synchronizinh more than two threads. On the other side he also gave
 universality resuls, proving that some very simple constructs are enough for
 implementing any lock-free algorithm for any number of threads.
 
@@ -47,7 +47,7 @@ lenghts, normally either 32 or 64 bits.
   * Is a procedure that can complete in a finite number of steps, regardless of
     of the relative speeds of other threads.
 * Lock-free:
-  * Is a procedure that guarantees progress of at least one of the threads 
+  * Is a procedure that guarantees progress of at least one of the threads
   executing the procedure. This means that some threads may be delayed.
 * Lock-based
   * This tipe of process cannot provide any of the above guarantees, and
@@ -62,7 +62,9 @@ threads
 during signals or async interrupts. This is because the interrupt might occur
 right while the routine holds some lock. With lock-free routines, there's no
 such problem; theads can freely interleave execution
-* 
+* Priority inversion immunity: Priority inversion occurs when a low-priority
+threar holds a lock to a mutex needed by a hih-priority thread, case in which
+the CPU
 
 
 - - -
