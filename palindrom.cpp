@@ -1,4 +1,5 @@
 /* Solution to problem number one */
+
 #include <string>
 #include <stdexcept>
 #include <iostream>
