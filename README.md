@@ -81,6 +81,10 @@ But is also true for:
 
 #### Why the primality test should get only up-to `sqrt(n)` for any integer `n`
 
+Since if `d` is greater than `sqrt(n)` and `d` is a divisor of `n`, then `n/d`
+is less than `sqrt(n)` and is also a divisor of `n`; therefore, if `n` has a
+divisor, you will find it by the time you get to `sqrt(n)`.
+
 
 #### [Benchmarking progamming languages](http://benchmarksgame.alioth.debian.org/)
 
