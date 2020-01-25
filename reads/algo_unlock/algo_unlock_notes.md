@@ -157,12 +157,57 @@ iteration will p > r.
 
 ### Recursive form 
 
+```
+def recursive_bin_search(A,p,r,x):
+    if p > r return None
+    q = floor((p+r)/2)
+    if A[q] == x return q
 
+    if A[q] > x:
+        return recursive_bin_search(A, p, q-1, x)
+    else
+        return recursive_bin_search(A, q+1, r, x)
+```
 
 
 
 ### Selection sort
+ This algorithm divides the list into sorted and unsorted. At the start, the 
+ sorted subset is empty, then it linearly searched the smallest element in the
+ unsortedset and places this in the first index of the sorted subset.
+ Then searches again the smallest element in the unsorted set and places it in
+ the second index of the sorted set. This procedure is repeated until the 
+ unsorted set is empty.
 
+```
+Inputs:
+    A: an array
+    n: cardinality of the array
+Result: The elements in A are sorted in nondecreasing order
+def selection_sort(A, n)
+    for i = 1 to n-1:
+        indx_of_smallest = i
+        for j = i+1 to n:
+            if A[j] < A[indx_of_smallest]:
+                indx_of_smallest = j
+        swap A[i] with A[indx_of_smallest]
+```
+
+ The run time is `Theta(n^2)` given that every in order to get an element in the
+ sorted list we need to traverse the unsorted list, every time an element less
+ this means the number of operations is given by the aritmetic series:
+
+ ```
+ (n-1) + (n-2) + (n-3) + ... + 2 + 1  = n(n+1) / 2 
+ ```
+
+ As the asynptotic notation disregards the lower and constant terms `n²` 
+ remains as the order.
+
+The big-Oh and Omega order is also `n²`.  This is the worst of the 4 sorting
+algorithms listed here. But it has the advantage that it noves the elements
+only `Theta(n)`. If moving array elements is time-consuming then selection sort
+might be a reasonable choice.
 
 
 ### Insertion sort
