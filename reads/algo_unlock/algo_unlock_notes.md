@@ -102,3 +102,71 @@ eventually reach the base case.
 Statement contrapositive: 
 `if a then b` contrapositive `if not b then not a`. The contrapositive
 of a statement is true _iff_ the statement is true.
+
+## Sorting and searching
+
+When the elements in the list are not ordered, a search will take `O(n)`.
+Only when the elements have an order the search can get to `O(lg n)`.
+
+In order to sort elements, the elements have to be comparable and have a notion
+of "less than".
+
+All of the next following algorithms take either `Theta(n^2)` or `Theta(n lg n)`.
+
+## Binary search
+
+Requires the list to be sorted. It takes `O(lg n)` to search an n-element.
+Pseudo code:
+
+```
+def bin_search(A, n, x): A->list; n-> size of list; x-> element to find
+1)    set p = 0 and set r = n-1
+2)    while p <= r:
+2a)     q = floor((p+r)/2)
+2b)     if A[q] == x
+            return q
+        else:
+2c)       if A[q] > x:
+            r = q - 1
+          else:
+2d)         p = q + 1
+    
+3)  return None # The item was not found
+```
+
+#### Loop invariant
+    > At the start of each loop of step 2, if `x` is in the array `A`, then is
+    > somewhere in the subarray `A[p..r]`
+
+#### Initialization
+
+Step 1) initializes the indices `p` and `r` to `0` and `n-1` respectively.
+Then the loop invariant is true when the procedure first enters the loop.
+
+
+#### Maintenance:
+
+Steps 2C and 2D adjust either `p` or `r` correclty.
+
+#### Termination
+
+If `x` is not in the array, then eventually `p` and `r` will be equal then the
+step 2a will assign to `q` the same value of `p` or `r`.  If step 2c sets r to
+`q-1`, then at the start of the next iteration, `r == p - 1` and the next 
+iteration will p > r. 
+
+### Recursive form 
+
+
+
+
+
+### Selection sort
+
+
+
+### Insertion sort
+
+### merge sort
+
+### quick sort`
