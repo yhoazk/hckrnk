@@ -36,9 +36,6 @@ class bin_tree:
                 self.left + new_val
                 
 
-
-
-
 def test_ByfirstAdding_RootKeepsVal():
     tree = bin_tree(2)
     assert('2' == str(tree))
