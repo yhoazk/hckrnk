@@ -1,0 +1,144 @@
+<html>
+<head>
+    <!-- Firefox does not support wakelock
+       https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API
+       Check with version 88.0.1
+    -->
+    <title> Box clock demo </title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: black;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        #box_clock {
+            color: green;
+            font-family: Monospace;
+            font-size: 150px;
+            text-align: center;
+            margin: auto;
+        }
+
+        #btn_start {
+            color: green;
+            font-size: 150px;
+        }
+
+        #btn_stop {
+            color: red;
+            font-size: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> BLabla </h1>
+    <div id="box_clock"></div>
+    <button type="button" id="btn_start">Start</button>
+    <button type="button" id="btn_stop">Stop</button>
+    <button type="button" id="btn_beep">Beep</button>
+
+    <script type="text/javascript">
+
+        var beep = (function () {
+            var ctxClass = window.audioContext || window.AudioContext || window.AudioContext || window.webkitAudioContext
+            var ctx = new ctxClass();
+            return function (duration, type, finishedCallback) {
+                duration = +duration;
+                // only 0-4 are valid types
+                type = (type % 5) || 0;
+                if (typeof finishedCallback != "function") {
+                    finishedCallback = function () { };
+                }
+                var osc = ctx.createOscillator();
+                osc.type = type;
+                // osc.type = "sine";
+                osc.connect(ctx.destination);
+                if (osc.noteOn) osc.noteOn(0);
+                if (osc.start) osc.start(0);
+                setTimeout(function () {
+                    if (osc.noteOff) osc.noteOf(0);
+                    if (osc.stop) osc.sop();
+                    finishedCallback();
+                }, duration);
+
+            };
+        })();
+        document.getElementById('btn_beep').addEventListener("click", function () {
+            var button = this;
+            button.disabled = true;
+            beep(1000, 2, function () {
+                button.disabled = false;
+            });
+        });
+        var box_div = document.getElementById('box_clock');
+        var clock = document.createElement("div");
+        clock.innerHTML = "19:20h";
+        var lap = 3 * 60;
+        var res = 30;
+        let start = Date.now();
+        box_div.appendChild(clock);
+        setInterval(
+            function () {
+                var diff = Math.floor((Date.now() - start) / 1000);
+                var m = String(Math.floor(diff / 60)).padStart(2, '0');
+                var s = String(diff % 60).padStart(2, '0');
+                document.getElementById('box_clock').innerHTML = `${m}:${s}`
+                if (diff >= lap) {
+                    start = Date.now();
+                }
+            },
+            1000);
+
+        var beep = (function () {
+            var ctxClass = window.audioContext || window.AudioContext || window.AudioContext || window.webkitAudioContext
+            var ctx = new ctxClass();
+            return function (duration, type, finishedCallback) {
+
+                duration = +duration;
+
+                // Only 0-4 are valid types.
+                type = (type % 5) || 0;
+
+                if (typeof finishedCallback != "function") {
+                    finishedCallback = function () { };
+
+                }
+
+                var osc = ctx.createOscillator();
+
+                osc.type = type;
+                //osc.type = "sine";
+
+                osc.connect(ctx.destination);
+                if (osc.noteOn) osc.noteOn(0);
+                if (osc.start) osc.start();
+
+                setTimeout(function () {
+                    if (osc.noteOff) osc.noteOff(0);
+                    if (osc.stop) osc.stop();
+                    finishedCallback();
+
+                }, duration);
+
+
+            };
+
+        })();
+
+        document.getElementById("btn_stop").addEventListener("click", function () {
+            var button = this;
+            button.disabled = true;
+            beep(1000, 2, function () {
+                button.disabled = false;
+
+            });
+        });
+    </script>
+</body>
+
+</html>
