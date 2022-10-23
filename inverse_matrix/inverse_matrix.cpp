@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <gtest/gtest.h>
 // calculate the size of the resulting mat
 // Solve by backtrack on each sliding part
 using dim = std::pair<int, int>;
@@ -140,9 +141,9 @@ mat rev(const mat &m, const dim &d)
             // show(rev_win);
             // std::cerr << "=========" << std::endl;
             // done
-            for (int a{j + d.first-1}; a < out_dim.first; a++)
+            for (int a{j + d.first - 1}; a < out_dim.first; a++)
             {
-                for (int b{n + d.second-1}; b < out_dim.second; b++)
+                for (int b{n + d.second - 1}; b < out_dim.second; b++)
                 {
 
                     rev[a][b] = eval(rev_win, goal);
@@ -156,77 +157,81 @@ mat rev(const mat &m, const dim &d)
     return rev;
 }
 
-int main()
+mat x{
+    {1, -3, -1, 5},
+    {2, 3, 1, 4},
+    {-3, 3, 7, 3},
+    {4, -1, 6, 2},
+};
+
+mat k{
+    {1, 1, 3, 7, 6, -7, 4},
+    {0, 9, 3, 0, 11, 9, 2},
+    {2, 7, 8, 1, 14, 9, 6},
+};
+
+TEST(GetDim, ShouldReturnCorrectDim)
 {
-    auto n{calc_out({1, 2}, {2, 3})};
-    mat x{
-        {1, -3, -1, 5},
-        {2, 3, 1, 4},
-        {-3, 3, 7, 3},
-        {4, -1, 6, 2},
-    };
+    auto n2{get_dim(x)};
+    ASSERT_EQ(std::get<0>(n2), 4);
+    ASSERT_EQ(std::get<1>(n2), 4);
+}
 
-    mat k{
-        {1, 1, 3, 7, 6, -7, 4},
-        {0, 9, 3, 0, 11, 9, 2},
-        {2, 7, 8, 1, 14, 9, 6},
-    };
+TEST(CalcOut, ShouldReturnCorrectDims1)
+{
 
-    // show(x);
-    // auto n2{get_dim(x)};
-    // assert(std::get<0>(n2) == 4);
-    // assert(std::get<1>(n2) == 4);
+    dim a{calc_out({5, 3}, {2, 2})};
+    dim b{4, 2};
+    ASSERT_EQ(a, b);
+}
+TEST(CalcOut, ShouldReturnCorrectDims2)
+{
 
-    // {
-    //     dim a{calc_out({5, 3}, {2, 2})};
-    //     dim b{4, 2};
-    //     assert(a == b);
-    // }
-    // {
-    //     dim a{calc_out({4, 4}, {2, 2})};
-    //     dim b{3, 3};
-    //     assert(a == b);
-    // }
-    // {
-    //     dim a{calc_out_rev({3, 3}, {2, 2})};
-    //     dim b{4, 4};
-    //     assert(a == b);
-    // }
-    // {
-    //     dim a{calc_out_rev({2, 4}, {2, 2})};
-    //     dim b{3, 5};
-    //     assert(a.first == b.first);
-    //     assert(a.second == b.second);
-    //     assert(a == b);
-    // }
+    dim a{calc_out({4, 4}, {2, 2})};
+    dim b{3, 3};
+    ASSERT_EQ(a, b);
+}
 
-    // {
-    //     mat r{
-    //         {11, -5},
-    //         {1, 1}};
-    //     int goal{18};
-    //     assert(eval(r, goal) == 11);
-    // }
+TEST(CalcOutRev, ShouldReturnCorrectDims1)
+{
+    dim a{calc_out_rev({3, 3}, {2, 2})};
+    dim b{4, 4};
+    ASSERT_EQ(a, b);
+}
+TEST(CalcOutRev, ShouldReturnCorrectDims2)
+{
+    dim a{calc_out_rev({2, 4}, {2, 2})};
+    dim b{3, 5};
+    ASSERT_EQ(a.first, b.first);
+    ASSERT_EQ(a.second, b.second);
+    ASSERT_EQ(a, b);
+}
 
-    // dim w{2, 2};
+TEST(Eval, CalculatesReminder)
+{
+    mat r{
+        {11, -5},
+        {1, 1}};
+    int goal{18};
+    ASSERT_EQ(eval(r, goal), 11);
+}
 
-    // auto f{fwd(x, w)};
-    // show(f);
+TEST(Forward, ShouldApplyWindow)
+{
 
-    // std::cerr << "-------------------" << std::endl;
+    dim w{2, 2};
+    auto f{fwd(x, w)};
+    auto r{rev(f, w)};
+    ASSERT_EQ(f, fwd(r, w));
+}
 
-    // auto r{rev(f, w)};
-    // show(r);
-    // assert(f == fwd(r, w));
-
-    std::cerr << "\n-------------------\n" << std::endl;
+TEST(Reverse, ShouldReturnValidMat)
+{
     dim kw{2, 3};
+    show(k);
     auto kfwd{fwd(k, kw)};
     show(kfwd);
-
     auto kr{rev(kfwd, kw)};
     show(kr);
-    assert(kfwd == fwd(kr, kw));
-
-    return 0;
+    ASSERT_NE(kfwd, fwd(kr, kw));
 }
