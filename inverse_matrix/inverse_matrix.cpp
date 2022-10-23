@@ -88,12 +88,12 @@ int eval(mat &m, int goal_val)
     {
         for (int j{0}; j < d.second; j++)
         {
-            std::cerr << "m[" << i << "][" << j << "] = " << m[i][j] << std::endl;
+            // std::cerr << "m[" << i << "][" << j << "] = " << m[i][j] << std::endl;
             acc += m[i][j];
         }
     }
 
-    std::cerr << "eval: " << goal_val - (acc - m[d.first - 1][d.second - 1]) << std::endl;
+    // std::cerr << "eval: " << goal_val - (acc - m[d.first - 1][d.second - 1]) << std::endl;
     return goal_val - (acc - m[d.first - 1][d.second - 1]);
 }
 
@@ -121,7 +121,7 @@ mat rev(const mat &m, const dim &d)
         for (int n{0}; n < in_dim.second; n++)
         {
             int goal{m[j][n]};
-            std::cerr << ">m[" << j << "][" << n << "] = " << m[j][n] << std::endl;
+            // std::cerr << ">m[" << j << "][" << n << "] = " << m[j][n] << std::endl;
             mat rev_win{};
             rev_win.resize(d.first);
             for (auto &r : rev_win)
@@ -129,20 +129,20 @@ mat rev(const mat &m, const dim &d)
                 r.resize(d.second);
             }
             // copy rev values to temp window
-            std::cerr << "=========" << std::endl;
+            // std::cerr << "=========" << std::endl;
             for (int x{0}; x < d.first; x++)
             {
                 for (int y{0}; y < d.second; y++)
                 {
-                    rev_win[x][y] = rev[j+x][n+y];
+                    rev_win[x][y] = rev[j + x][n + y];
                 }
             }
-            show(rev_win);
-            std::cerr << "=========" << std::endl;
+            // show(rev_win);
+            // std::cerr << "=========" << std::endl;
             // done
-            for (int a{j + 1}; a < out_dim.first; a++)
+            for (int a{j + d.first-1}; a < out_dim.first; a++)
             {
-                for (int b{n + 1}; b < out_dim.second; b++)
+                for (int b{n + d.second-1}; b < out_dim.second; b++)
                 {
 
                     rev[a][b] = eval(rev_win, goal);
@@ -166,10 +166,16 @@ int main()
         {4, -1, 6, 2},
     };
 
-    show(x);
-    auto n2{get_dim(x)};
-    assert(std::get<0>(n2) == 4);
-    assert(std::get<1>(n2) == 4);
+    mat k{
+        {1, 1, 3, 7, 6, -7, 4},
+        {0, 9, 3, 0, 11, 9, 2},
+        {2, 7, 8, 1, 14, 9, 6},
+    };
+
+    // show(x);
+    // auto n2{get_dim(x)};
+    // assert(std::get<0>(n2) == 4);
+    // assert(std::get<1>(n2) == 4);
 
     // {
     //     dim a{calc_out({5, 3}, {2, 2})};
@@ -202,15 +208,25 @@ int main()
     //     assert(eval(r, goal) == 11);
     // }
 
-    dim w{2, 2};
+    // dim w{2, 2};
 
-    auto f{fwd(x, w)};
-    show(f);
+    // auto f{fwd(x, w)};
+    // show(f);
 
-    std::cerr << "-------------------" << std::endl;
+    // std::cerr << "-------------------" << std::endl;
 
-    auto r{rev(f, w)};
-    show(r);
+    // auto r{rev(f, w)};
+    // show(r);
+    // assert(f == fwd(r, w));
+
+    std::cerr << "\n-------------------\n" << std::endl;
+    dim kw{2, 3};
+    auto kfwd{fwd(k, kw)};
+    show(kfwd);
+
+    auto kr{rev(kfwd, kw)};
+    show(kr);
+    assert(kfwd == fwd(kr, kw));
 
     return 0;
 }
