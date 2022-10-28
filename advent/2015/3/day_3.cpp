@@ -50,6 +50,7 @@ std::vector<std::string> loadWords(std::string filename)
 
 // for first step size is the ans
 using locations = std::map<std::pair<size_t, size_t>, size_t>;
+using uniq_locations = std::set<std::pair<size_t, size_t>>;
 
 std::map<char, std::pair<size_t, size_t>> moves{
     {'^', {1, 0}},
@@ -73,6 +74,42 @@ size_t visited_houses(std::string mvs)
     return loc.size();
 }
 
+
+size_t visited_houses_robot(std::string mvs)
+{
+    size_t x_santa{0};
+    size_t y_santa{0};
+    size_t x_robot{0};
+    size_t y_robot{0};
+    locations loc_santa{{{0, 0}, 1}}; // first location starts with 1
+    locations loc_robot{}; // first location starts with 1
+    uniq_locations ulocs;
+    int santa_or_robot{1};
+    for (const auto &m : mvs)
+    {
+        const auto[incx, incy] = moves[m];
+        if(santa_or_robot) {
+            x_santa += incx;
+            y_santa += incy;
+            loc_santa[{x_santa, y_santa}] += 1;
+        } else {
+            x_robot += incx;
+            y_robot += incy;
+            loc_robot[{x_robot, y_robot}] += 1;
+        }
+        santa_or_robot ^= 1;
+    }
+    // get the unique locations
+    for(const auto& [k,v] : loc_santa) {
+        ulocs.insert(k);
+    }
+    for(const auto& [k,v] : loc_robot) {
+        ulocs.insert(k);
+    }
+
+    return ulocs.size();
+}
+
 int main()
 {
 
@@ -80,12 +117,20 @@ int main()
     auto vals{loadWords("input.orig")};
     size_t sum{0};
     for (auto const& seq : vals) {
-        std::cout << visited_houses(seq) << std::endl;
+        std::cout << visited_houses(seq) << std::endl; //2081
+        std::cout << visited_houses_robot(seq) << std::endl; // 2341
     }
 
     assert(2 == visited_houses(">"));
     assert(4 == visited_houses("^>v<"));
     assert(2 == visited_houses("^v^v^v^v^v"));
     // 2081
+    // part 2
+    assert(3 ==  visited_houses_robot("^v"));
+    assert(3 ==  visited_houses_robot("^>v<"));
+    assert(11 == visited_houses_robot("^v^v^v^v^v"));
+    // 2081
+
+
     return 0;
 }
