@@ -34,7 +34,8 @@ import (
 // "crypto/md5"
 
 func check(data []byte) bool {
-	sample := []byte{0, 0, 15}
+	//sample := []byte{0, 0, 15} 5 zeros
+	sample := []byte{0, 0, 0}
 	for i, e := range sample {
 		// fmt.Printf("%d == %d\n", e, data[i])
 		if !(data[i] <= e) {
@@ -87,4 +88,5 @@ func main() {
 		}
 		inc++
 	}
+	fmt.Println(inc)
 }
