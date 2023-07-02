@@ -1,5 +1,5 @@
 cc_test(
     name = "solar_test",
     srcs = ["test_solar_doomsday.cpp"],
-    deps = ["@gtest//:gtest", "@gtest//:gtest_main", "//:solar_doom"]
+    deps = ["@com_github_google_googletest//:gtest", "@com_github_google_googletest//:gtest_main", "//solar:solar_doom"]
 )

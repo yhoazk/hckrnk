@@ -6,7 +6,7 @@ cc_binary(
     copts = [],
     deps = [
         ":solar_doom",
-        "@gtest//:gtest",
+        "@com_github_google_googletest//:gtest",
    #     "@gtest//:gtest_main"
             ],
 )

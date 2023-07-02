@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "solar_doomsday.h"
+#include "solar/solar_doomsday.h"
 /* Parametrized test  */
 
 static std::vector<std::pair<unsigned long, std::vector<unsigned long> > > sols{
