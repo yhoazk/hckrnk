@@ -92,17 +92,29 @@ public:
     std::string result;
     for (auto v : rom_vals)
     {
-      // std::cout << "k: " << k << " v: " << v << '\n';
-      std::cout << "N: " << n << " val: " << val << " v: " << v << " val/k:" << val / v << '\n';
+      // std::cout << "N: " << n << " val: " << val << " v: " << v << " val/k:" << val / v << '\n';
       units[n] = val / v;
       val -= (units[n++] * v);
     }
+
     for (int x{0}; x < rom_vals.size(); ++x)
     {
-      std::cout << "N:" << std::to_string(units[x]) << '\n';
-      auto val{rom_vals[x]};
-      if(val == 4 or val == 9) {
-
+      // std::cout << "N:" << std::to_string(units[x]) << '\n';
+      auto val{units[x]};
+      if(val == 4) {
+        // concatenate one if this level + one of the above if is 0 otherwise 2 above
+        if(units[x-1]) {
+          // not zero, then 9
+        if (result.size() >= 1) {
+          result.pop_back();
+        }
+          result += std::string(1, REV_LUT[rom_vals[x]]);
+          result += std::string(1, REV_LUT[rom_vals[x-2]]);
+        } else {
+          // zero, then 4
+          result += std::string(1, REV_LUT[rom_vals[x]]);
+          result += std::string(1, REV_LUT[rom_vals[x-1]]);
+        }
       } else {
         result += std::string(units[x], REV_LUT[rom_vals[x]]);
       }
@@ -160,8 +172,45 @@ TEST(IntToRoman, One)
   ASSERT_THAT(s.IntToRoman(1), Eq("I"));
 }
 
-TEST(IntToRoman, Four)
+TEST(IntToRoman, _377)
 {
   Solution s;
   ASSERT_THAT(s.IntToRoman(377), Eq(std::string("CCCLXXVII")));
+}
+
+TEST(IntToRoman, Four)
+{
+  Solution s;
+  ASSERT_THAT(s.IntToRoman(4), Eq(std::string("IV")));
+}
+
+TEST(IntToRoman, Fourteen)
+{
+  Solution s;
+  ASSERT_THAT(s.IntToRoman(14), Eq(std::string("XIV")));
+}
+
+TEST(IntToRoman, Nine)
+{
+  Solution s;
+  ASSERT_THAT(s.IntToRoman(9), Eq(std::string("IX")));
+}
+
+
+TEST(IntToRoman, Ninety)
+{
+  Solution s;
+  ASSERT_THAT(s.IntToRoman(90), Eq(std::string("XC")));
+}
+
+TEST(Bidi,ZeroTo399) 
+{
+  Solution s{};
+  for (int i = 1; i < 3999; i++)
+  {
+    auto roman{s.IntToRoman(i)};
+    std::cout << "R:: " << roman << " int:" << i << std::endl;
+    ASSERT_THAT(s.romanToInt(roman), Eq(i));
+  }
+    
 }
